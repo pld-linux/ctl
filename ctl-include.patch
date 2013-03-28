@@ -18,3 +18,14 @@
  #include <typeinfo>
  #include <CtlExc.h>
  #include <Iex.h>
+--- ctl-1.4.1/IlmCtl/CtlInterpreter.cpp.orig	2006-12-14 23:43:55.000000000 +0100
++++ ctl-1.4.1/IlmCtl/CtlInterpreter.cpp	2013-03-28 22:09:59.194860880 +0100
+@@ -69,6 +69,8 @@
+     #include <io.h>
+     #include <stdio.h>
+     #include <stdlib.h>
++#else
++    #include <unistd.h>
+ #endif
+ 
+ using namespace std;
