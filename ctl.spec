@@ -2,12 +2,13 @@ Summary:	Color Transform Language libraries
 Summary(pl.UTF-8):	Biblioteki CTL (języka przekształceń kolorów)
 Name:		ctl
 Version:	1.4.1
-Release:	1
+Release:	2
 License:	BSD + IP clause
 Group:		Libraries
-Source0:	http://dl.sourceforge.net/ampasctl/%{name}-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/ampasctl/%{name}-%{version}.tar.gz
 # Source0-md5:	11e215aea6c6380833ade3b576660638
-URL:		http://www.oscars.org/council/ctl.html
+Patch0:		%{name}-include.patch
+URL:		http://www.oscars.org/science-technology/council/projects/ctl.html
 BuildRequires:	ilmbase-devel >= 1.0.1
 BuildRequires:	libstdc++-devel
 BuildRequires:	pkgconfig
@@ -67,6 +68,7 @@ Statyczna biblioteka CTL.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %configure
