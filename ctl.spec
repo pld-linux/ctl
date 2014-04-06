@@ -9,6 +9,7 @@ Source0:	https://github.com/ampas/CTL/archive/%{name}-%{version}.tar.gz
 # Source0-md5:	020aa09422c13b2f62c1c40f18d9d093
 Patch0:		%{name}-libdir.patch
 Patch1:		%{name}-ctlrender.patch
+Patch2:		%{name}-pc.patch
 URL:		http://www.oscars.org/science-technology/council/projects/ctl.html
 BuildRequires:	OpenEXR-devel
 BuildRequires:	aces_container-devel
@@ -143,6 +144,7 @@ ctlrender obsługuje formaty plików OpenEXR, TIFF, DPX oraz ACES.
 %setup -q -n CTL-%{name}-%{version}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %cmake . \
