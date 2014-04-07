@@ -173,6 +173,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libIlmCtl.so.*.*.*
 %attr(755,root,root) %{_libdir}/libIlmCtlMath.so.*.*.*
 %attr(755,root,root) %{_libdir}/libIlmCtlSimd.so.*.*.*
+%dir %{_datadir}/CTL
 
 %files devel
 %defattr(644,root,root,755)
@@ -199,7 +200,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/exr_ctl_exr
 %attr(755,root,root) %{_bindir}/exrdpx
-%{_prefix}/lib/CTL
+%{_datadir}/CTL/change_saturation.ctl
+%{_datadir}/CTL/transform_DPX_EXR.ctl
+%{_datadir}/CTL/transform_EXR_DPX.ctl
+%{_datadir}/CTL/utilities.ctl
 
 %files -n ctlrender
 %defattr(644,root,root,755)
