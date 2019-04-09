@@ -5,12 +5,13 @@ Version:	1.5.2
 Release:	2
 License:	BSD + IP clause
 Group:		Libraries
+#Source0Download: https://github.com/ampas/CTL/releases
 Source0:	https://github.com/ampas/CTL/archive/%{name}-%{version}.tar.gz
 # Source0-md5:	4796bf258d0c66d421c864996482f952
 Patch0:		%{name}-libdir.patch
 Patch1:		%{name}-ctlrender.patch
 Patch2:		%{name}-pc.patch
-URL:		http://www.oscars.org/science-technology/council/projects/ctl.html
+URL:		https://www.oscars.org/science-technology/sci-tech-projects/color-transformation-language
 BuildRequires:	OpenEXR-devel
 BuildRequires:	aces_container-devel
 BuildRequires:	cmake >= 2.8
