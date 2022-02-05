@@ -2,15 +2,17 @@ Summary:	Color Transform Language libraries
 Summary(pl.UTF-8):	Biblioteki CTL (języka przekształceń kolorów)
 Name:		ctl
 Version:	1.5.2
-Release:	3
+Release:	4
 License:	BSD + IP clause
 Group:		Libraries
-#Source0Download: https://github.com/ampas/CTL/releases
+#Source0Download: https://github.com/ampas/CTL/tags
 Source0:	https://github.com/ampas/CTL/archive/%{name}-%{version}.tar.gz
 # Source0-md5:	4796bf258d0c66d421c864996482f952
 Patch0:		%{name}-libdir.patch
 Patch1:		%{name}-ctlrender.patch
 Patch2:		%{name}-pc.patch
+Patch3:		%{name}-openexr-update.patch
+Patch4:		%{name}-c++17.patch
 URL:		https://www.oscars.org/science-technology/sci-tech-projects/color-transformation-language
 BuildRequires:	OpenEXR-devel
 BuildRequires:	aces_container-devel
@@ -55,7 +57,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	ilmbase-devel >= 2.0.0
 Requires:	libstdc++-devel
-Obsoletes:	ctl-static
+Obsoletes:	ctl-static < 1.5
 
 %description devel
 Header files for CTL library.
@@ -84,7 +86,7 @@ Group:		Development/Libraries
 Requires:	OpenEXR-devel
 Requires:	ctl-devel = %{version}-%{release}
 Requires:	openexr_ctl = %{version}-%{release}
-Obsoletes:	openexr_ctl-static
+Obsoletes:	openexr_ctl-static < 1.1
 
 %description -n openexr_ctl-devel
 Header files for IlmInfCtl library.
@@ -146,9 +148,13 @@ ctlrender obsługuje formaty plików OpenEXR, TIFF, DPX oraz ACES.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
+%patch4 -p1
 
 %build
-%cmake . \
+install -d build
+cd build
+%cmake .. \
 	-DINSTALL_CMAKE_DIR=%{_libdir}/cmake/CTL \
 	-DINSTALL_LIB_DIR=%{_libdir}
 %{__make}
@@ -156,7 +162,7 @@ ctlrender obsługuje formaty plików OpenEXR, TIFF, DPX oraz ACES.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
+%{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 # packaged as %doc
