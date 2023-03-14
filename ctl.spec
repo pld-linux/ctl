@@ -13,6 +13,7 @@ Patch1:		%{name}-ctlrender.patch
 Patch2:		%{name}-pc.patch
 Patch3:		%{name}-openexr-update.patch
 Patch4:		%{name}-c++17.patch
+Patch5:		%{name}-link.patch
 URL:		https://www.oscars.org/science-technology/sci-tech-projects/color-transformation-language
 BuildRequires:	OpenEXR-devel
 BuildRequires:	aces_container-devel
@@ -150,6 +151,7 @@ ctlrender obsługuje formaty plików OpenEXR, TIFF, DPX oraz ACES.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 install -d build
