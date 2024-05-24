@@ -1,28 +1,22 @@
 Summary:	Color Transform Language libraries
 Summary(pl.UTF-8):	Biblioteki CTL (języka przekształceń kolorów)
 Name:		ctl
-Version:	1.5.2
-Release:	4
+Version:	1.5.3
+Release:	1
 License:	BSD + IP clause
 Group:		Libraries
 #Source0Download: https://github.com/ampas/CTL/tags
 Source0:	https://github.com/ampas/CTL/archive/%{name}-%{version}.tar.gz
-# Source0-md5:	4796bf258d0c66d421c864996482f952
-Patch0:		%{name}-libdir.patch
-Patch1:		%{name}-ctlrender.patch
-Patch2:		%{name}-pc.patch
-Patch3:		%{name}-openexr-update.patch
-Patch4:		%{name}-c++17.patch
-Patch5:		%{name}-link.patch
+# Source0-md5:	63b1b97a0dd4b64161e9d4f50b3f1b0c
 URL:		https://www.oscars.org/science-technology/sci-tech-projects/color-transformation-language
-BuildRequires:	OpenEXR-devel
+# or ilmbase + OpenEXR 2.x
+BuildRequires:	Imath-devel >= 3.0
+BuildRequires:	OpenEXR-devel >= 3.0
 BuildRequires:	aces_container-devel
-BuildRequires:	cmake >= 2.8
-BuildRequires:	ilmbase-devel >= 2.0.0
-BuildRequires:	libstdc++-devel
+BuildRequires:	cmake >= 3.12
+BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	libtiff-devel
-BuildRequires:	pkgconfig
-Requires:	ilmbase >= 2.0.0
+BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -56,8 +50,8 @@ Summary:	Header files for CTL library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki CTL
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	ilmbase-devel >= 2.0.0
-Requires:	libstdc++-devel
+Requires:	OpenEXR-devel >= 3.0
+Requires:	libstdc++-devel >= 6:4.7
 Obsoletes:	ctl-static < 1.5
 
 %description devel
@@ -84,7 +78,7 @@ przekształceń kolorów).
 Summary:	Header files for IlmInfCtl library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki IlmInfCtl
 Group:		Development/Libraries
-Requires:	OpenEXR-devel
+Requires:	OpenEXR-devel >= 3.0
 Requires:	ctl-devel = %{version}-%{release}
 Requires:	openexr_ctl = %{version}-%{release}
 Obsoletes:	openexr_ctl-static < 1.1
@@ -137,7 +131,7 @@ file format in the process.
 ctlrender supports OpenEXR, TIFF, DPX, and ACES container file
 formats.
 
-%description -n ctlrender
+%description -n ctlrender -l pl.UTF-8
 ctlrender to uruchamiany z linii poleceń program do nakładania
 przekształceń CTL na obraz przy użyciu jednego lub więcej skryptów
 CTL, potencjalnie także zmieniając w trakcie format pliku.
@@ -146,19 +140,12 @@ ctlrender obsługuje formaty plików OpenEXR, TIFF, DPX oraz ACES.
 
 %prep
 %setup -q -n CTL-%{name}-%{version}
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
 
 %build
 install -d build
 cd build
-%cmake .. \
-	-DINSTALL_CMAKE_DIR=%{_libdir}/cmake/CTL \
-	-DINSTALL_LIB_DIR=%{_libdir}
+%cmake ..
+
 %{__make}
 
 %install
@@ -168,7 +155,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 # packaged as %doc
-%{__rm} -r $RPM_BUILD_ROOT%{_prefix}/doc/CTL
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/CTL/CtlManual.*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -191,8 +178,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libIlmCtlMath.so
 %attr(755,root,root) %{_libdir}/libIlmCtlSimd.so
 %{_includedir}/CTL
-%{_pkgconfigdir}/CTL.pc
-%{_libdir}/cmake/CTL
 
 %files -n openexr_ctl
 %defattr(644,root,root,755)
@@ -201,9 +186,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n openexr_ctl-devel
 %defattr(644,root,root,755)
-#%attr(755,root,root) %{_libdir}/libIlmImfCtl.so
 %{_includedir}/OpenEXR/ImfCtlApplyTransforms.h
-%{_pkgconfigdir}/OpenEXR_CTL.pc
 
 %files -n openexr_ctl-progs
 %defattr(644,root,root,755)
