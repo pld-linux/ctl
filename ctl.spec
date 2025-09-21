@@ -2,7 +2,7 @@ Summary:	Color Transform Language libraries
 Summary(pl.UTF-8):	Biblioteki CTL (języka przekształceń kolorów)
 Name:		ctl
 Version:	1.5.3
-Release:	1
+Release:	2
 License:	BSD + IP clause
 Group:		Libraries
 #Source0Download: https://github.com/ampas/CTL/tags
