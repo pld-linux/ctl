@@ -1,13 +1,13 @@
 Summary:	Color Transform Language libraries
 Summary(pl.UTF-8):	Biblioteki CTL (języka przekształceń kolorów)
 Name:		ctl
-Version:	1.5.3
-Release:	4
+Version:	1.5.4
+Release:	1
 License:	BSD + IP clause
 Group:		Libraries
-#Source0Download: https://github.com/ampas/CTL/tags
-Source0:	https://github.com/ampas/CTL/archive/%{name}-%{version}.tar.gz
-# Source0-md5:	63b1b97a0dd4b64161e9d4f50b3f1b0c
+#Source0Download: https://github.com/aces-aswf/CTL/tags
+Source0:	https://github.com/aces-aswf/CTL/archive/%{name}-%{version}.tar.gz
+# Source0-md5:	a0d36da7fbb945fbd5ecf090350257ff
 URL:		https://www.oscars.org/science-technology/sci-tech-projects/color-transformation-language
 # or ilmbase + OpenEXR 2.x
 BuildRequires:	Imath-devel >= 3.0
@@ -163,29 +163,37 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
+%post	-n openexr_ctl -p /sbin/ldconfig
+%postun	-n openexr_ctl -p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS CHANGELOG LICENSE README.md
-%attr(755,root,root) %{_libdir}/libIlmCtl.so.*.*.*
-%attr(755,root,root) %{_libdir}/libIlmCtlMath.so.*.*.*
-%attr(755,root,root) %{_libdir}/libIlmCtlSimd.so.*.*.*
+%{_libdir}/libIlmCtl.so.*.*.*
+%ghost %{_libdir}/libIlmCtl.so.1.5
+%{_libdir}/libIlmCtlMath.so.*.*.*
+%ghost %{_libdir}/libIlmCtlMath.so.1.5
+%{_libdir}/libIlmCtlSimd.so.*.*.*
+%ghost %{_libdir}/libIlmCtlSimd.so.1.5
 %dir %{_datadir}/CTL
 
 %files devel
 %defattr(644,root,root,755)
 %doc doc/CtlManual.pdf
-%attr(755,root,root) %{_libdir}/libIlmCtl.so
-%attr(755,root,root) %{_libdir}/libIlmCtlMath.so
-%attr(755,root,root) %{_libdir}/libIlmCtlSimd.so
+%{_libdir}/libIlmCtl.so
+%{_libdir}/libIlmCtlMath.so
+%{_libdir}/libIlmCtlSimd.so
 %{_includedir}/CTL
 
 %files -n openexr_ctl
 %defattr(644,root,root,755)
 %doc OpenEXR_CTL/README
-%attr(755,root,root) %{_libdir}/libIlmImfCtl.so
+%{_libdir}/libIlmImfCtl.so.*.*.*
+%ghost %{_libdir}/libIlmImfCtl.so.1.5
 
 %files -n openexr_ctl-devel
 %defattr(644,root,root,755)
+%{_libdir}/libIlmImfCtl.so
 %{_includedir}/OpenEXR/ImfCtlApplyTransforms.h
 
 %files -n openexr_ctl-progs
