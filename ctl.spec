@@ -1,13 +1,13 @@
 Summary:	Color Transform Language libraries
 Summary(pl.UTF-8):	Biblioteki CTL (języka przekształceń kolorów)
 Name:		ctl
-Version:	1.5.4
+Version:	1.5.5
 Release:	1
 License:	BSD + IP clause
 Group:		Libraries
 #Source0Download: https://github.com/aces-aswf/CTL/tags
 Source0:	https://github.com/aces-aswf/CTL/archive/%{name}-%{version}.tar.gz
-# Source0-md5:	a0d36da7fbb945fbd5ecf090350257ff
+# Source0-md5:	853ae23fd5bfeeef627fa126bd2b40d5
 URL:		https://www.oscars.org/science-technology/sci-tech-projects/color-transformation-language
 # or ilmbase + OpenEXR 2.x
 BuildRequires:	Imath-devel >= 3.0
